@@ -1,0 +1,7 @@
+services:
+  Haircut: {duration_min: 30, price: 35}
+  Fade: {duration_min: 45, price: 45}
+  Kids Cut: {duration_min: 30, price: 25}
+  Beard Trim: {duration_min: 20, price: 20}
+  Cut + Beard: {duration_min: 60, price: 50}
+  Design: {duration_min: 60, price: 60}
