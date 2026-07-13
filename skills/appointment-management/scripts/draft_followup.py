@@ -21,7 +21,11 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
 
 from barber_ops.config import load_config  # noqa: E402
-from barber_ops.drafting import render_rebook_draft, render_reschedule_confirmation  # noqa: E402
+from barber_ops.drafting import (  # noqa: E402
+    MissingContact,
+    render_rebook_draft,
+    render_reschedule_confirmation,
+)
 from barber_ops.models import Booking  # noqa: E402
 
 
@@ -29,7 +33,7 @@ def _try_channels(render, preferred: str):
     for channel in (preferred, "email" if preferred == "sms" else "sms"):
         try:
             return render(channel)
-        except ValueError:
+        except MissingContact:
             continue
     return None
 
@@ -59,8 +63,21 @@ def main() -> int:
             else:
                 drafts.append(draft.to_dict())
     elif mode == "reschedule":
+        if "booking" not in payload or "new_start" not in payload:
+            print("error: reschedule payload requires 'booking' and 'new_start'", file=sys.stderr)
+            return 2
         b = Booking.from_dict(payload["booking"])
-        new_start = datetime.fromisoformat(payload["new_start"])
+        try:
+            new_start = datetime.fromisoformat(payload["new_start"])
+        except (TypeError, ValueError):
+            print(f"error: could not parse new_start {payload['new_start']!r}", file=sys.stderr)
+            return 2
+        if new_start.tzinfo is None:
+            print(
+                "error: new_start must include a UTC offset, e.g. 2026-07-14T10:00:00-04:00",
+                file=sys.stderr,
+            )
+            return 2
         draft = _try_channels(lambda ch: render_reschedule_confirmation(b, new_start, cfg, ch), preferred)
         if draft is None:
             skipped.append({"event_id": b.event_id, "reason": f"no contact info for {b.customer}"})

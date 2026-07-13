@@ -56,3 +56,18 @@ def test_bad_mode_exits_2():
     r = run({"mode": "send-everything", "bookings": []})
     assert r.returncode == 2
     assert "mode" in r.stderr
+
+
+def test_bad_channel_preference_exits_2():
+    r = run({"mode": "rebook", "channel_preference": "fax", "bookings": [ALAN]})
+    assert r.returncode == 2
+    assert "channel_preference" in r.stderr
+
+
+def test_naive_new_start_exits_2():
+    r = run({
+        "mode": "reschedule", "channel_preference": "sms",
+        "booking": ALAN, "new_start": "2026-07-14T10:00:00",
+    })
+    assert r.returncode == 2
+    assert "UTC offset" in r.stderr

@@ -10,6 +10,10 @@ from .models import Booking
 CHANNELS = ("sms", "email")
 
 
+class MissingContact(ValueError):
+    """Raised when a booking has no contact info for the requested channel."""
+
+
 @dataclass
 class Draft:
     channel: str
@@ -32,7 +36,7 @@ def _to_for(booking: Booking, channel: str) -> str:
     key = "phone" if channel == "sms" else "email"
     to = booking.contact.get(key)
     if not to:
-        raise ValueError(f"no {key} on file for {booking.customer}")
+        raise MissingContact(f"no {key} on file for {booking.customer}")
     return to
 
 
