@@ -32,7 +32,7 @@ menu and business hours live in `data/services.yaml` and `data/config.yaml`.
 - **Demo mode:** use `data/demo/week_fixture.json` (a seeded week for the
   demo shop "Sharp Cuts Barbershop"; "today" in the demo is Sun 2026-07-12).
 
-**Note:** the scripts require `pyyaml`. Install with `python3 -m pip install pyyaml`.
+**Note:** the scripts require `pyyaml`. Install with `python3 -m pip install --user pyyaml`.
 
 ## Workflow 1: No-show review
 
@@ -67,4 +67,8 @@ menu and business hours live in `data/services.yaml` and `data/config.yaml`.
    (keep the title convention; do not add a marker to future events).
 6. Draft a confirmation:
    `{"mode": "reschedule", "channel_preference": "sms", "booking": {...}, "new_start": "<ISO>"}`
-   through `draft_followup.py`, then handle the draft per Hard rule 1.
+   through `draft_followup.py`, then handle the draft per Hard rule 1. The
+   `booking` dict must include `event_id`, `service`, `customer`, `start`, and
+   `end` (`marker`, `status`, and `contact` are optional); the easiest source
+   is the normalized booking dict for the customer's event from
+   `detect_no_shows.py` output or the fetched events.

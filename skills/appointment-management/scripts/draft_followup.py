@@ -66,7 +66,11 @@ def main() -> int:
         if "booking" not in payload or "new_start" not in payload:
             print("error: reschedule payload requires 'booking' and 'new_start'", file=sys.stderr)
             return 2
-        b = Booking.from_dict(payload["booking"])
+        try:
+            b = Booking.from_dict(payload["booking"])
+        except KeyError as exc:
+            print(f"error: booking dict missing required key {exc.args[0]!r}; required: event_id, service, customer, start, end", file=sys.stderr)
+            return 2
         try:
             new_start = datetime.fromisoformat(payload["new_start"])
         except (TypeError, ValueError):

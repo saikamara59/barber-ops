@@ -52,6 +52,16 @@ def test_reschedule_confirmation():
     assert "Tue Jul 14 at 10:00 AM" in out["drafts"][0]["body"]
 
 
+def test_reschedule_booking_missing_key_exits_2():
+    incomplete = {k: v for k, v in ALAN.items() if k != "end"}
+    r = run({
+        "mode": "reschedule", "channel_preference": "sms",
+        "booking": incomplete, "new_start": "2026-07-14T10:00:00-04:00",
+    })
+    assert r.returncode == 2
+    assert "required" in r.stderr
+
+
 def test_bad_mode_exits_2():
     r = run({"mode": "send-everything", "bookings": []})
     assert r.returncode == 2

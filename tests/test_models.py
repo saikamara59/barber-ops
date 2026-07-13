@@ -58,6 +58,13 @@ def test_naive_datetime_gets_default_tz():
     assert bookings[0].start.utcoffset() is not None
 
 
+def test_zulu_suffix_parsed():
+    ev = _event(start={"dateTime": "2026-07-06T14:00:00Z"}, end={"dateTime": "2026-07-06T14:45:00Z"})
+    bookings, rejected = normalize_events([ev], TZ)
+    assert rejected == []
+    assert bookings[0].start.utcoffset() is not None
+
+
 def test_all_day_and_inverted_events_rejected():
     all_day = _event(id="evt-a", start={"date": "2026-07-06"}, end={"date": "2026-07-07"})
     inverted = _event(id="evt-b", start={"dateTime": "2026-07-06T11:00:00-04:00"})

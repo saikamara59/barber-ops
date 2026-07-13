@@ -76,7 +76,7 @@ def parse_contact(description: str | None) -> dict[str, str]:
 def _parse_when(when: dict, default_tz: str) -> datetime:
     if "dateTime" not in when:
         raise ValueError("event has no dateTime (all-day events are not bookings)")
-    dt = datetime.fromisoformat(when["dateTime"])
+    dt = datetime.fromisoformat(when["dateTime"].replace("Z", "+00:00"))
     if dt.tzinfo is None:
         dt = dt.replace(tzinfo=ZoneInfo(when.get("timeZone", default_tz)))
     return dt
