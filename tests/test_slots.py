@@ -30,9 +30,16 @@ def test_free_windows_monday_fade(week_data):
     ]
 
 
-def test_window_too_short_for_service_excluded(week_data):
-    # Design needs 60 min; the 09:00-10:00 window no longer qualifies.
+def test_exact_fit_window_included(week_data):
+    # Design needs 60 min; the 09:00-10:00 window is exactly 60 min and qualifies.
     windows = free_windows(_bookings(week_data), _cfg(), date(2026, 7, 13), 60)
+    assert windows[0] == (datetime(2026, 7, 13, 9, 0, tzinfo=TZ), datetime(2026, 7, 13, 10, 0, tzinfo=TZ))
+    assert len(windows) == 3
+
+
+def test_window_too_short_for_service_excluded(week_data):
+    # A 90-min need excludes the 60-min 09:00-10:00 window.
+    windows = free_windows(_bookings(week_data), _cfg(), date(2026, 7, 13), 90)
     assert windows[0][0] == datetime(2026, 7, 13, 10, 45, tzinfo=TZ)
     assert len(windows) == 2
 

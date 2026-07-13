@@ -33,7 +33,7 @@ def free_windows(
     if cursor < day_end:
         windows.append((cursor, day_end))
     need = timedelta(minutes=min_minutes)
-    return [(s, e) for s, e in windows if e - s > need]
+    return [(s, e) for s, e in windows if e - s >= need]
 
 
 def windows_for_range(
