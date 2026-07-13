@@ -60,6 +60,7 @@ def test_week_end_boundary_inclusive(week_data):
     r = revenue_rollup(bookings + [sunday, next_monday], services, date(2026, 7, 6), AS_OF)
     assert r["realized"] == 715  # 680 + Sunday's $35; Monday excluded
     assert r["counts"]["showed"] == 17
+    assert r["counts"]["upcoming"] == 0  # Monday booking excluded by week filter, not re-bucketed
 
 
 def test_unknown_service_reported_not_counted(week_data):
