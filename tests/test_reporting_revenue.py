@@ -43,6 +43,25 @@ def test_rollup_upcoming_week(week_data):
     assert r["realized"] == 0
 
 
+def test_week_end_boundary_inclusive(week_data):
+    bookings, services = _inputs(week_data)
+    sunday = Booking(
+        event_id="evt-sun", service="Haircut", customer="Sun D", marker="showed",
+        start=datetime.fromisoformat("2026-07-12T07:00:00-04:00"),
+        end=datetime.fromisoformat("2026-07-12T07:30:00-04:00"),
+        status="confirmed", contact={},
+    )
+    next_monday = Booking(
+        event_id="evt-nextmon", service="Haircut", customer="Mon D", marker="showed",
+        start=datetime.fromisoformat("2026-07-13T10:00:00-04:00"),
+        end=datetime.fromisoformat("2026-07-13T10:30:00-04:00"),
+        status="confirmed", contact={},
+    )
+    r = revenue_rollup(bookings + [sunday, next_monday], services, date(2026, 7, 6), AS_OF)
+    assert r["realized"] == 715  # 680 + Sunday's $35; Monday excluded
+    assert r["counts"]["showed"] == 17
+
+
 def test_unknown_service_reported_not_counted(week_data):
     bookings, services = _inputs(week_data)
     perm = Booking(

@@ -35,3 +35,18 @@ def test_report_gap_and_actions():
     assert "## Suggested actions" in md
     assert "appointment-management" in md
     assert "Tuesday afternoon" in md
+
+
+def test_unknown_services_surfaced():
+    import json
+    s = subprocess.run(
+        [sys.executable, str(SUMMARY), str(FIXTURE),
+         "--week-start", "2026-07-06", "--as-of", "2026-07-12T09:00:00-04:00"],
+        capture_output=True, text=True, check=True,
+    )
+    summary = json.loads(s.stdout)
+    summary["revenue"]["unknown_services"] = [{"event_id": "evt-x", "service": "Perm"}]
+    r = subprocess.run([sys.executable, str(RENDER)], capture_output=True, text=True, input=json.dumps(summary))
+    assert r.returncode == 0, r.stderr
+    assert "Perm" in r.stdout
+    assert "excluded from all revenue figures" in r.stdout

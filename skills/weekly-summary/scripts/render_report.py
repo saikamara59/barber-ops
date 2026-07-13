@@ -54,6 +54,13 @@ def render(summary: dict) -> str:
     ]
     if summary.get("rejected"):
         lines += [f"> ⚠️ {len(summary['rejected'])} event(s) could not be parsed — review them.", ""]
+    if rev.get("unknown_services"):
+        names = ", ".join(u["service"] for u in rev["unknown_services"])
+        lines += [
+            f"> ⚠️ {len(rev['unknown_services'])} booking(s) use services not in the price map "
+            f"({names}) — excluded from all revenue figures.",
+            "",
+        ]
     lines += [
         "## Revenue",
         "| | Count | Amount |",

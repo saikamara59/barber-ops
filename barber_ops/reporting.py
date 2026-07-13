@@ -16,6 +16,7 @@ def revenue_rollup(
     week_start: date,
     as_of: datetime,
 ) -> dict:
+    """Aggregate one week of bookings into revenue totals, counts, and per-service breakdown."""
     first, last = week_start, week_start + timedelta(days=6)
     totals = {"realized": 0, "missed": 0, "unconfirmed": 0, "upcoming": 0}
     counts = {"showed": 0, "no_show": 0, "unconfirmed": 0, "cancelled": 0, "upcoming": 0}
