@@ -1,0 +1,31 @@
+{
+  "timeZone": "America/New_York",
+  "events": [
+    {"id": "evt-001", "summary": "Haircut — Devon P [showed]", "description": "phone: (555) 010-1001\nemail: devon.p@example.com", "start": {"dateTime": "2026-07-06T09:00:00-04:00"}, "end": {"dateTime": "2026-07-06T09:30:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-002", "summary": "Fade — Marcus J [showed]", "description": "phone: (555) 010-1002\nemail: marcus.j@example.com", "start": {"dateTime": "2026-07-06T10:00:00-04:00"}, "end": {"dateTime": "2026-07-06T10:45:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-003", "summary": "Haircut — Alan R [no-show]", "description": "phone: (555) 010-1003", "start": {"dateTime": "2026-07-06T13:00:00-04:00"}, "end": {"dateTime": "2026-07-06T13:30:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-004", "summary": "Beard Trim — Sam K [showed]", "description": "phone: (555) 010-1004", "start": {"dateTime": "2026-07-06T15:00:00-04:00"}, "end": {"dateTime": "2026-07-06T15:20:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-005", "summary": "Kids Cut — Tyler W [showed]", "description": "phone: (555) 010-1005", "start": {"dateTime": "2026-07-07T09:30:00-04:00"}, "end": {"dateTime": "2026-07-07T10:00:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-006", "summary": "Cut + Beard — Omar B [showed]", "description": "phone: (555) 010-1006\nemail: omar.b@example.com", "start": {"dateTime": "2026-07-07T11:00:00-04:00"}, "end": {"dateTime": "2026-07-07T12:00:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-007", "summary": "Fade — Jerome T [showed]", "description": "phone: (555) 010-1007", "start": {"dateTime": "2026-07-08T09:00:00-04:00"}, "end": {"dateTime": "2026-07-08T09:45:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-008", "summary": "Haircut — Nick D", "description": "email: nick.d@example.com", "start": {"dateTime": "2026-07-08T10:00:00-04:00"}, "end": {"dateTime": "2026-07-08T10:30:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-009", "summary": "Design — Kevin M [showed]", "description": "phone: (555) 010-1009", "start": {"dateTime": "2026-07-08T12:00:00-04:00"}, "end": {"dateTime": "2026-07-08T13:00:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-010", "summary": "Haircut — Luis G", "description": "phone: (555) 010-1010", "start": {"dateTime": "2026-07-08T14:00:00-04:00"}, "end": {"dateTime": "2026-07-08T14:30:00-04:00"}, "status": "cancelled"},
+    {"id": "evt-011", "summary": "Fade — Andre S [showed]", "description": "phone: (555) 010-1011", "start": {"dateTime": "2026-07-08T16:00:00-04:00"}, "end": {"dateTime": "2026-07-08T16:45:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-012", "summary": "Haircut — Paul V [showed]", "description": "phone: (555) 010-1012", "start": {"dateTime": "2026-07-09T09:00:00-04:00"}, "end": {"dateTime": "2026-07-09T09:30:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-013", "summary": "Beard Trim — Chris O [no-show]", "description": "phone: (555) 010-1013\nemail: chris.o@example.com", "start": {"dateTime": "2026-07-09T11:00:00-04:00"}, "end": {"dateTime": "2026-07-09T11:20:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-014", "summary": "Fade — Marcus J [showed]", "description": "phone: (555) 010-1002\nemail: marcus.j@example.com", "start": {"dateTime": "2026-07-09T13:00:00-04:00"}, "end": {"dateTime": "2026-07-09T13:45:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-015", "summary": "Cut + Beard — Dre W [showed]", "description": "phone: (555) 010-1015", "start": {"dateTime": "2026-07-09T17:00:00-04:00"}, "end": {"dateTime": "2026-07-09T18:00:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-016", "summary": "Kids Cut — Mia L [showed]", "description": "phone: (555) 010-1016", "start": {"dateTime": "2026-07-10T09:00:00-04:00"}, "end": {"dateTime": "2026-07-10T09:30:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-017", "summary": "Haircut — Jordan F", "description": "phone: (555) 010-1017", "start": {"dateTime": "2026-07-10T10:00:00-04:00"}, "end": {"dateTime": "2026-07-10T10:30:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-018", "summary": "Design — Trey B [showed]", "description": "phone: (555) 010-1018", "start": {"dateTime": "2026-07-10T12:00:00-04:00"}, "end": {"dateTime": "2026-07-10T13:00:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-019", "summary": "Fade — Isaiah C [showed]", "description": "phone: (555) 010-1019", "start": {"dateTime": "2026-07-10T15:00:00-04:00"}, "end": {"dateTime": "2026-07-10T15:45:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-020", "summary": "Fade — Malik H [showed]", "description": "phone: (555) 010-1020", "start": {"dateTime": "2026-07-11T08:00:00-04:00"}, "end": {"dateTime": "2026-07-11T08:45:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-021", "summary": "Haircut — Ethan Q [no-show]", "description": "phone: (555) 010-1021", "start": {"dateTime": "2026-07-11T09:00:00-04:00"}, "end": {"dateTime": "2026-07-11T09:30:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-022", "summary": "Cut + Beard — Victor N [showed]", "description": "phone: (555) 010-1022", "start": {"dateTime": "2026-07-11T11:00:00-04:00"}, "end": {"dateTime": "2026-07-11T12:00:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-023", "summary": "Haircut — Rob T", "description": "phone: (555) 010-1023\nemail: rob.t@example.com", "start": {"dateTime": "2026-07-11T13:00:00-04:00"}, "end": {"dateTime": "2026-07-11T13:30:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-024", "summary": "Fade — Marcus J", "description": "phone: (555) 010-1002\nemail: marcus.j@example.com", "start": {"dateTime": "2026-07-13T10:00:00-04:00"}, "end": {"dateTime": "2026-07-13T10:45:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-025", "summary": "Haircut — Devon P", "description": "phone: (555) 010-1001\nemail: devon.p@example.com", "start": {"dateTime": "2026-07-13T14:00:00-04:00"}, "end": {"dateTime": "2026-07-13T14:30:00-04:00"}, "status": "confirmed"},
+    {"id": "evt-026", "summary": "Beard Trim — Sam K", "description": "phone: (555) 010-1004", "start": {"dateTime": "2026-07-14T09:00:00-04:00"}, "end": {"dateTime": "2026-07-14T09:20:00-04:00"}, "status": "confirmed"}
+  ]
+}
