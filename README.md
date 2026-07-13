@@ -51,7 +51,17 @@ In Cowork, the `appointment-management` skill drives these same scripts with
 events fetched live from the Google Calendar connector; email follow-ups are
 created as Gmail drafts and are never sent.
 
-## Live demo (optional, phase 2)
+## Live demo (optional)
 
-`tools/seed_calendar.py` (phase 2) pushes the fixture into a real Google
-Calendar so the same workflows run against live connector data.
+Seed the demo week into a real Google Calendar, then run the same skills
+against events fetched via the Calendar connector:
+
+    python3 -m pip install --user google-api-python-client google-auth-oauthlib
+    python3 tools/seed_calendar.py --calendar-id <id> --week-of <last-monday YYYY-MM-DD>
+
+Needs a `credentials.json` (OAuth Desktop-app client, Calendar API enabled)
+in the working directory; the OAuth token is cached in `token.json`. Both are
+gitignored. `--week-of` re-dates the fixture week onto a real week; pass last
+Monday to make "this past week" demos line up. Cancelled fixture events are
+skipped (they exist only for offline no-show demos). When running the skills
+against the seeded calendar, use a matching `--week-start` and real `--as-of`.
