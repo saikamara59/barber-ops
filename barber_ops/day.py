@@ -44,7 +44,7 @@ def build_day_sheet(
         (
             b for b in bookings
             if b.status != "cancelled"
-            and (b.start.date() == day or (b.start < day_end and b.end > day_start))
+            and (b.start.astimezone(tz).date() == day or (b.start < day_end and b.end > day_start))
         ),
         key=lambda b: b.start,
     )
