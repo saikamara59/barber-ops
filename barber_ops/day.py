@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from datetime import date, datetime
+from zoneinfo import ZoneInfo
 
 from .config import ShopConfig
 from .models import Booking
@@ -36,8 +37,15 @@ def build_day_sheet(
                 "appointments": [], "booked_minutes": 0, "now": None, "next": None,
                 "walkin_windows": []}
 
+    tz = ZoneInfo(cfg.timezone)
+    day_start = datetime.combine(day, hours.open, tzinfo=tz)
+    day_end = datetime.combine(day, hours.close, tzinfo=tz)
     todays = sorted(
-        (b for b in bookings if b.status != "cancelled" and b.start.date() == day),
+        (
+            b for b in bookings
+            if b.status != "cancelled"
+            and (b.start.date() == day or (b.start < day_end and b.end > day_start))
+        ),
         key=lambda b: b.start,
     )
     booked_minutes = sum(int((b.end - b.start).total_seconds() // 60) for b in todays)

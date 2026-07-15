@@ -3,7 +3,7 @@ from pathlib import Path
 
 from barber_ops.config import load_config
 from barber_ops.day import build_day_sheet
-from barber_ops.models import normalize_events
+from barber_ops.models import Booking, normalize_events
 from barber_ops.services import load_services
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -51,3 +51,20 @@ def test_closed_day(week_data):
     assert s["closed"] is True
     assert s["appointments"] == []
     assert s["walkin_windows"] == []
+
+
+def test_overnight_spillover_appears_in_lineup(week_data):
+    bookings, rejected = normalize_events(week_data["events"], week_data["timeZone"])
+    assert rejected == []
+    spill = Booking(
+        event_id="evt-spill", service="Design", customer="Night O", marker=None,
+        start=datetime.fromisoformat("2026-07-12T23:00:00-04:00"),
+        end=datetime.fromisoformat("2026-07-13T09:30:00-04:00"),
+        status="confirmed", contact={},
+    )
+    cfg = load_config(ROOT / "data" / "config.yaml")
+    services = load_services(ROOT / "data" / "services.yaml")
+    s = build_day_sheet(bookings + [spill], cfg, services, date(2026, 7, 13), MORNING)
+    assert [a["customer"] for a in s["appointments"]] == ["Night O", "Marcus J", "Devon P"]
+    assert s["walkin_windows"][0]["start"] == "2026-07-13T09:30:00-04:00"
+    assert s["walkin_windows"][0]["minutes"] == 30
