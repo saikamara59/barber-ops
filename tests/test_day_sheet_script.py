@@ -42,3 +42,9 @@ def test_naive_as_of_rejected():
     r = run(str(FIXTURE), "--date", "2026-07-13", "--as-of", "2026-07-13T08:00:00")
     assert r.returncode == 2
     assert "UTC offset" in r.stderr
+
+
+def test_bad_date_rejected():
+    r = run(str(FIXTURE), "--date", "July 13", "--as-of", MORNING)
+    assert r.returncode == 2
+    assert "date" in r.stderr
