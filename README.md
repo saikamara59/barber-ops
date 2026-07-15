@@ -6,6 +6,7 @@ skills for a barber shop, built on the Gmail and Google Calendar connectors.
 - `skills/appointment-management/` — no-show detection, reschedules, and
   draft-only follow-up messages. See its `SKILL.md`.
 - `skills/weekly-summary/` — weekly revenue + gap report. See its `SKILL.md`.
+- `skills/day-sheet/` — morning lineup + walk-in room. See its `SKILL.md`.
 - `barber_ops/` — shared pure-Python library (no network, no credentials).
 - `data/demo/week_fixture.json` — a seeded week for "Sharp Cuts Barbershop".
 
@@ -46,6 +47,15 @@ skills for a barber shop, built on the Gmail and Google Calendar connectors.
 
    Expect: $680 realized, $90 missed to no-shows, $105 unconfirmed, largest
    open block Tue Jul 7 12:00 PM–6:00 PM.
+
+5. Morning day sheet (demo "today" is Mon 2026-07-13 for this one):
+
+       python3 skills/day-sheet/scripts/day_sheet.py \
+         data/demo/week_fixture.json --date 2026-07-13 \
+         --as-of 2026-07-13T08:00:00-04:00 --format text
+
+   Expect: 2 appointments (Marcus J 10:00 AM, Devon P 2:00 PM) and three
+   walk-in windows, all fitting any service.
 
 In Cowork, the `appointment-management` skill drives these same scripts with
 events fetched live from the Google Calendar connector; email follow-ups are
